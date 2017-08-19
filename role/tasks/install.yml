@@ -1,0 +1,7 @@
+---
+- name: ES Install package
+  unarchive:
+    src: {{ es_download_base_url }}/{{ es_version }}
+    dest: {{ es_install_path }}
+    remote_src: {{ es_remote_src_pkg }}
+  tags: install

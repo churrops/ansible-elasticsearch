@@ -1,0 +1,3 @@
+---
+- hosts: elastic-1
+  tasks:
