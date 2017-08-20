@@ -33,3 +33,8 @@
     regexp: 'export PATH=$PATH:{{ es_dest_install_path }}/{{ es_name }}/bin'
     line: 'export PATH=$PATH:{{ es_dest_install_path }}/{{ es_name }}/bin'
   tags: install
+
+#- name: Memory
+#  shell: MEMORIexpr `free -m |grep Mem |awk '{print $2}'` / 2
+#  args:
+#    chdir: /tmp

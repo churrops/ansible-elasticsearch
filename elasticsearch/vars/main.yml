@@ -10,12 +10,13 @@ es_remote_src: True
 es_dest_install_path: /opt
 
 # JMV Configuration
+es_jvm_mem: "expr `free -m |grep Mem |awk '{print $2}'` / 2"
 es_jvm_Xms: Xms512m
 es_jvm_Xmx: Xmx512m
 
 # elasticsearch.yml Configuration
-es.cluster.name: elastic_testing
-es.node.name: node-1
+es.cluster.name: es_churrops_testing
+es.node.name: {{ ansible_hostname }}
 es.node.attr.rack: r1
 es.path.data: /elasticsearch
 es.path.logs: /var/log/elasticsearch
