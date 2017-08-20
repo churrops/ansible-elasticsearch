@@ -1,7 +1,28 @@
 ---
+# Install Variables
+#java_url: "http://download.oracle.com/otn-pub/java/jdk/8u144-b01/090f390dda5b47b9b721c7dfaa008135/jdk-8u144-linux-x64.rpm"
+java_url_rpm: "http://download.oracle.com/otn-pub/java/jdk/8u144-b01/jdk-8u144-linux-x64.rpm"
 es_name: elasticsearch
 es_version: elasticsearch-5.5.2
 es_src_base_url: "https://artifacts.elastic.co/downloads/elasticsearch"
 es_src_pkg: "{{ es_src_base_url }}/{{ es_version }}.zip"
 es_remote_src: True
 es_dest_install_path: /opt
+
+# JMV Configuration
+es_jvm_Xms: Xms512m
+es_jvm_Xmx: Xmx512m
+
+# elasticsearch.yml Configuration
+es.cluster.name: elastic_testing
+es.node.name: node-1
+es.node.attr.rack: r1
+es.path.data: /elasticsearch
+es.path.logs: /var/log/elasticsearch
+es.bootstrap.memory_lock: true
+es.network.host:
+es.http.port: 9200
+es.discovery.zen.ping.unicast.hosts: ["host1", "host2"]
+es.discovery.zen.minimum_master_nodes: 3
+es.gateway.recover_after_nodes: 3
+es.action.destructive_requires_name: true

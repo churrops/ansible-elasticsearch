@@ -1,8 +1,19 @@
 ---
-- name: Elasticsearch | Ensure unzip package
-  yum: name=unzip state=installed
+- name: Elasticsearch | Set swappiness to 1
+  sysctl: name=vm.swappiness value=1 state=present
+  tags: install
+
+- name: Elasticsearch | Set vm.max_map_count
+  sysctl: name=vm.max_map_count value=262144 state=present
+  tags: install
+
+- name: Elasticsearch | Install unzip and java package
+  yum: name={{ item }} state=installed
   when: ansible_os_family == "RedHat"
   tags: install
+  with_items:
+    - unzip
+    - java-1.8.0-openjdk
 
 - name: Elasticsearch | Download and Install Package
   unarchive:
@@ -12,6 +23,13 @@
     keep_newer: yes
   tags: install
 
-- name: Elasticsearch | Ensure Link
+- name: Elasticsearch | Ensure Link elasticsearch
   file: src="{{ es_dest_install_path }}/{{ es_version }}" dest="{{ es_dest_install_path }}/{{ es_name }}" state=link
+  tags: install
+
+- name: Elasticsearch |
+  lineinfile:
+    path: /etc/profile
+    regexp: 'export PATH=$PATH:{{ es_dest_install_path }}/{{ es_name }}/bin'
+    line: 'export PATH=$PATH:{{ es_dest_install_path }}/{{ es_name }}/bin'
   tags: install

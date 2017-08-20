@@ -1,0 +1,36 @@
+# ======================== Elasticsearch Configuration =========================
+# ---------------------------------- Cluster -----------------------------------
+
+cluster.name: my-application
+
+# ------------------------------------ Node ------------------------------------
+
+#node.name: node-1
+#node.attr.rack: r1
+
+# ----------------------------------- Paths ------------------------------------
+
+#path.data: /path/to/data
+#path.logs: /path/to/logs
+
+# ----------------------------------- Memory -----------------------------------
+
+#bootstrap.memory_lock: true
+
+# ---------------------------------- Network -----------------------------------
+
+#network.host: 192.168.0.1
+#http.port: 9200
+
+# --------------------------------- Discovery ----------------------------------
+
+#discovery.zen.ping.unicast.hosts: ["host1", "host2"]
+#discovery.zen.minimum_master_nodes: 3
+
+# ---------------------------------- Gateway -----------------------------------
+
+#gateway.recover_after_nodes: 3
+
+# ---------------------------------- Various -----------------------------------
+
+#action.destructive_requires_name: true
