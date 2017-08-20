@@ -1,5 +1,0 @@
----
-es_download_base_url: https://artifacts.elastic.co/downloads/elasticsearch
-es_version: elasticsearch-5.5.2.zip
-es_remote_src_pkg: True
-es_dest_install_path: /opt
