@@ -16,7 +16,7 @@ es_jvm_Xmx: Xmx512m
 
 # elasticsearch.yml Configuration
 es.cluster.name: es_churrops_testing
-es.node.name: {{ ansible_hostname }}
+es.node.name: "{{ ansible_hostname }}"
 es.node.attr.rack: r1
 es.path.data: /elasticsearch
 es.path.logs: /var/log/elasticsearch
