@@ -1,6 +1,7 @@
 ---
-es_version: elasticsearch-5.5.2.zip
+es_name: elasticsearch
+es_version: elasticsearch-5.5.2
 es_src_base_url: "https://artifacts.elastic.co/downloads/elasticsearch"
-es_src_pkg: "{{ es_src_base_url }}/{{ es_version }}"
+es_src_pkg: "{{ es_src_base_url }}/{{ es_version }}.zip"
 es_remote_src: True
 es_dest_install_path: /opt

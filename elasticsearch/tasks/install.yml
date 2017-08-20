@@ -1,7 +1,17 @@
 ---
-- name: ES Install package
+- name: Elasticsearch | Ensure unzip package
+  yum: name=unzip state=installed
+  when: ansible_os_family == "RedHat"
+  tags: install
+
+- name: Elasticsearch | Download and Install Package
   unarchive:
-    src: {{ es_download_base_url }}/{{ es_version }}
-    dest: {{ es_install_path }}
-    remote_src: {{ es_remote_src_pkg }}
+    src: "{{ es_src_pkg }}"
+    dest: "{{ es_dest_install_path }}"
+    remote_src: "{{ es_remote_src }}"
+    keep_newer: yes
+  tags: install
+
+- name: Elasticsearch | Ensure Link
+  file: src="{{ es_dest_install_path }}/{{ es_version }}" dest="{{ es_dest_install_path }}/{{ es_name }}" state=link
   tags: install
