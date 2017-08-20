@@ -1,10 +1,10 @@
 ---
 - name: Elasticsearch | Set swappiness to 1
-  sysctl: name=vm.swappiness value=1 state=present
-  tags: install
-
-- name: Elasticsearch | Set vm.max_map_count
-  sysctl: name=vm.max_map_count value=262144 state=present
+  systcl: name="{{ item.name }}" value={{ item.value }} state=present sysctl=yes
+  with_items:
+    - {name: vm.swappiness,     value: 1     }
+    - {name: vm.max_map_count,  value: 262144}
+    - {name: fs.file-max,       value: 262144}
   tags: install
 
 - name: Elasticsearch | Install unzip and java package
