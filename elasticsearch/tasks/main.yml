@@ -1,2 +1,3 @@
 ---
+- include: prep.yml
 - include: install.yml

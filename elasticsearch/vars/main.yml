@@ -7,7 +7,8 @@ es_version: elasticsearch-5.5.2
 es_src_base_url: "https://artifacts.elastic.co/downloads/elasticsearch"
 es_src_pkg: "{{ es_src_base_url }}/{{ es_version }}.zip"
 es_remote_src: True
-es_dest_install_path: /opt
+es_dest_install_path: /usr/share
+es_uid: 9200
 
 # JMV Configuration
 es_jvm_mem: "expr `free -m |grep Mem |awk '{print $2}'` / 2"
