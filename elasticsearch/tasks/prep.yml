@@ -15,6 +15,9 @@
     - {name: fs.file-max,       value: 262144}
   tags: install
 
+- name: Elasticsearch | Ensure Datadir
+  file: name={{ es_datadir }} state=directory 
+
 - name: Elasticsearch | Create Group
   group: name={{ es_name }} gid={{ es_uid }} state=present
   tags: install
