@@ -1,0 +1,24 @@
+---
+- name: Elasticsearch | Add Repository Java8
+  apt_repository: repo='ppa:webupd8team/java' state=present
+  tags: install
+
+- name: Java 8 | Install Package
+  apt: name=oracle-java8-installer state=present
+  tags: install
+
+- name: Elasticsearch | Add apt_key
+  apt_key: url="https://artifacts.elastic.co/GPG-KEY-elasticsearch" state=present
+  tags: install
+
+- name: Java 8 | Install Package
+  apt: name= update_cache=yes state=present
+  with_items:
+    - apt-transport-https
+    - oracle-java8-installer
+    - elasticsearch
+  tags: install
+
+- name: Elasticsearch | Start and Enabled
+  service: name=elasticsearch state=started enabled=yes
+  tags: install
