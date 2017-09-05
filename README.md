@@ -1,7 +1,7 @@
-Install GrayLog Stack with Ansible
+Install Graylog Stack with Ansible
 =========
 
-A brief description of the role goes here.
+This role ensure Graylog install with ElasticSearch, MongoDB, GraylogServer and Graylog Web. 
 
 Requirements
 ------------
