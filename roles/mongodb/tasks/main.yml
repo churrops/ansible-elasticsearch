@@ -1,18 +1,27 @@
 ---
 - name: [GrayLog2 MongoDB] - ADD Repo
-  copy: src=files/mongodb-org-3.4.repo dest=/etc/yum.repos.d/ state=present
-  tags:
-    - install
-    - mongodb
+  copy: 
+    src: files/mongodb-org-3.4.repo 
+    dest: /etc/yum.repos.d/ state=present
+  tags: [install,mongodb]
 
 - name: [GrayLog2 MongoDB] - Install mongodb
-  yum: name=mongodb-org state=latest
-  tags:
-    - install
-    - mongodb
+  yum: 
+    name: mongodb-org 
+    state: latest
+  tags: [install,mongodb]
 
 - name: [GrayLog2 MongoDB] - Start and Add to boot
-  service: name=mongod state=started enabled=True
-  tags:
-    - install
-    - mongodb
+  service: 
+    name: mongod 
+    state: started 
+    enabled: True
+  tags: [install,mongodb]
+
+- name: [GrayLog2 MongoDB] - SELinux
+  seport:
+    ports: 27017
+    proto: tcp
+    setype: mongod_port_t
+    state: present
+  tags: [install,mongodb]

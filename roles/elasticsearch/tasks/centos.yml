@@ -1,0 +1,62 @@
+---
+- name: [GrayLog2 ElasticSearch] - Import GPG KEY
+  rpm_key:
+    state: present
+    key: https://artifacts.elastic.co/GPG-KEY-elasticsearch
+  tags: [install,elasticsearch]
+
+- name: [GrayLog2 ElasticSearch] - ADD Elastic Repo
+  copy:
+    src: files/elasticsearch-5.x.repo
+    dest: /etc/yum.repos.d/ state=present
+  tags: [install,elasticsearch]
+
+- name: [GrayLog2 ElasticSearch] - Install ElasticSearch
+  yum:
+    name: elasticsearch
+    state: present
+  tags: [install,elasticsearch]
+
+- name: [GrayLog2 MongoDB] - Start and Add to boot
+  service:
+    name: elasticsearch
+    state: started
+    enabled: True
+  tags: [install,elasticsearch]
+
+- name: [GrayLog2 MongoDB] - SELinux
+  seport:
+    ports: 27017
+    proto: tcp
+    setype: mongod_port_t
+    state: present
+  tags: [install,mongodb]
+
+Instalar o gpgkey do repositorio
+
+rpm --import https://artifacts.elastic.co/GPG-KEY-elasticsearch
+Criar o arquivo de repositório /etc/yum.repos.d/elasticsearch.repo:
+
+
+Editar o arquivo /etc/elasticsearch/jvm.options e ajustar a memória para o Elasticsearch:
+
+-Xms2g
+-Xmx2g
+Editar o arquivo /etc/elasticsearch/elasticsearch.yml e ajustar os seguintes parâmetros:
+
+cluster.name: graylog
+bootstrap.memory_lock: true
+index.codec: best_compression
+cluster.routing.allocation.disk.threshold_enabled: true
+cluster.routing.allocation.disk.watermark.low: 2gb
+cluster.routing.allocation.disk.watermark.high: 4gb
+Editar o arquivo /usr/lib/systemd/system/elasticsearch.service para habilitar o memory lock no serviço do Elasticsearch:
+
+Adicionar o texto abaixo no final da seção [Service] do arquivo:
+
+LimitMEMLOCK=infinity
+E aplicar:
+
+systemctl daemon-reload
+Habilitar e Iniciar o Elasticsearch
+

@@ -1,36 +1,17 @@
 # ======================== Elasticsearch Configuration =========================
-# ---------------------------------- Cluster -----------------------------------
-
-cluster.name: my-application
-
-# ------------------------------------ Node ------------------------------------
-
+cluster.name: graylog
 #node.name: node-1
 #node.attr.rack: r1
-
-# ----------------------------------- Paths ------------------------------------
-
 #path.data: /path/to/data
 #path.logs: /path/to/logs
-
-# ----------------------------------- Memory -----------------------------------
-
-#bootstrap.memory_lock: true
-
-# ---------------------------------- Network -----------------------------------
-
+bootstrap.memory_lock: true
 #network.host: 192.168.0.1
-#http.port: 9200
-
-# --------------------------------- Discovery ----------------------------------
-
+http.port: 9200
+index.codec: best_compression
+cluster.routing.allocation.disk.threshold_enabled: true
+cluster.routing.allocation.disk.watermark.low: 2gb
+cluster.routing.allocation.disk.watermark.high: 4gb
 #discovery.zen.ping.unicast.hosts: ["host1", "host2"]
 #discovery.zen.minimum_master_nodes: 3
-
-# ---------------------------------- Gateway -----------------------------------
-
 #gateway.recover_after_nodes: 3
-
-# ---------------------------------- Various -----------------------------------
-
 #action.destructive_requires_name: true
